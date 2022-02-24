@@ -8,10 +8,13 @@ public class Project {
     private int score;
     private int bestBefore;
     private int roleCount;
+
+    private Map<Role, Contributor> associations;
     
 
     public Project(String in) {
         roles = new ArrayList<>();
+        associations = new HashMap<>();
         var s = in.split(" ");
         name = s[0];
         duration = Integer.parseInt(s[1]);
@@ -33,6 +36,36 @@ public class Project {
     public String toString() {
         return this.name + " " + this.duration + " " + this.score + " "
             + this.bestBefore + " " + this.roleCount + " " + this.roles;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getBestBefore() {
+        return bestBefore;
+    }
+
+    public Map<Role, Contributor> getAssociations() {
+        return associations;
+    }
+
+    public String getContributors() {
+        String s = "";
+        for(Role r : roles) s += associations.get(r).getName() + " ";
+        return s.substring(0, s.length()-1);
     }
 
 
