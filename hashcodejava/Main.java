@@ -9,7 +9,9 @@ class Main {
     public Main() {
         contributors = new ArrayList<>();
         projects = new ArrayList<>();
-        readFromFile(contributors, projects, "../inputs/a_an_example_int.txt");
+        readFromFile(contributors, projects, "../inputs/a_an_example.in.txt");
+        contributors.forEach(System.out::println);
+        projects.forEach(System.out::println);
     }
 
     public static void main(String[] args) {
@@ -37,6 +39,7 @@ class Main {
                 for(int j = 0; j < proj.getRoleCount(); j++) {
                     proj.addRole(br.readLine());
                 }
+                projs.add(proj);
             }
         } catch(Exception ex) {
             ex.printStackTrace();

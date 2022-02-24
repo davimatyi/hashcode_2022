@@ -22,11 +22,17 @@ public class Project {
 
     void addRole(String role) {
         var split = role.split(" ");
-        roles.add(new Role(Integer.parseInt(split[1]), split[3], Integer.parseInt(split[5])));
+        roles.add(new Role(split[0], Integer.parseInt(split[1])));
     }
 
     public int getRoleCount() {
         return roleCount;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " " + this.duration + " " + this.score + " "
+            + this.bestBefore + " " + this.roleCount + " " + this.roles;
     }
 
 

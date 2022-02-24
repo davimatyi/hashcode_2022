@@ -1,26 +1,24 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Objects;
+// import java.io.*;
+import java.util.*;
 
 public class Contributor {
 
     private String name;
-    private HashMap<String, Integer> skills;
+    private List<Role> skills;
 
     public Contributor(String name) {
         this.name = name;
-        this.skills = new HashMap<>();
+        this.skills = new ArrayList<>();
 
     }
 
     void addSkill(String skill) {
         var split = skill.split(" ");
-        skills.put(split[0], Integer.parseInt(split[1]));
+        skills.add(new Role(split[0], Integer.parseInt(split[1])));
     }
 
     int getSkillLevel(String skill) {
-        return skills.getOrDefault(skill, 0);
+        return skills.stream().filter(r -> r.getSkill().equals(skill)).findFirst().map(Role::getLevel).orElse(0);
     }
 
     @Override
