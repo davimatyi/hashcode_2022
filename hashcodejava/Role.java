@@ -26,6 +26,10 @@ public class Role {
         this.level = level;
     }
 
+    public void increaseLevel() {
+        this.setLevel(this.getLevel() + 1);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

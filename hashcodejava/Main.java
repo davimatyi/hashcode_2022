@@ -19,8 +19,62 @@ class Main {
         simulationLoop();
     }
 
+    public boolean canStartProject(Project proj, ) {
+
+        if( getLessThenReq(req,skill) && isMore(req,skill))
+        if(equal knowladge) {
+
+        }
+
+        if(greather knowladge) {
+
+        }
+    }
 
     public void simulationLoop() {
+        int day = 0;
+        int score = 0;
+        var runningProjects = new ArrayList<Project>();
+        var outputProjects = new ArrayList<Project>();
+
+        while(!runningProjects.isEmpty() && !projects.isEmpty()) {
+            day++;
+            var projectsToRemove = new ArrayList<Integer>();
+            for(int i = 0; i < runningProjects.size(); i++ ) {
+                var proj = runningProjects.get(i);
+                if(proj.getStartDay() + proj.getDuration() - 1 == day) { 
+                    proj.getAssociations().forEach((role, contrib) -> {
+                        contrib.setAssigned(false);
+                        if(contrib.getSkillLevel(role.getSkill()) <= role.getLevel() ) {
+                            contrib.increaseSkillLevel(role.getSkill());
+                        }
+                    });
+                    projectsToRemove.add(i);
+                }
+            }
+
+            for(int i: projectsToRemove) {
+                runningProjects.remove(i);
+            }
+
+            projectsToRemove = new ArrayList<Integer>();
+
+            for(int i = 0; i < projects.size(); i++) {
+                var proj = projects.get(i);
+                
+                if(canStartProject(proj)) {
+                    outputProjects.add(proj);
+                    projectsToRemove.add(i);
+                }
+
+            }
+
+            for(int i: projectsToRemove) {
+                projects.remove(i);
+            }
+
+
+        }
 
     }
 
@@ -32,18 +86,14 @@ class Main {
 
             if(p1MaxDelay != p2MaxDelay) return Integer.compare(p1MaxDelay, p2MaxDelay);
 
-            int reqRes = Integer.compare(p2.getRoleCount(), p1.getRoleCount());
-            if(reqRes != 0) return reqRes;
-
             double p1ScoreDaily = p1.getScore() / (double)p1.getDuration();
             double p2ScoreDaily = p2.getScore() / (double)p2.getDuration(); 
             
             int dailyRes = Double.compare(p2ScoreDaily, p1ScoreDaily);
-            // if(dailyRes != 0) 
-            return dailyRes;
+            if(dailyRes != 0) return dailyRes;
 
             // mock implementation replace later
-            
+            return Integer.compare(p2.getRoleCount(), p1.getRoleCount());
         });
     }
 
@@ -78,4 +128,8 @@ class Main {
             ex.printStackTrace();
         }
     }
+
+
+
+    
 }

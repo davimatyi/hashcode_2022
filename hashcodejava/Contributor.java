@@ -5,11 +5,12 @@ public class Contributor {
 
     private String name;
     private List<Role> skills;
+    private boolean assigned;
 
     public Contributor(String name) {
         this.name = name;
         this.skills = new ArrayList<>();
-
+        this.assigned = false;
     }
 
     void addSkill(String skill) {
@@ -19,6 +20,12 @@ public class Contributor {
 
     int getSkillLevel(String skill) {
         return skills.stream().filter(r -> r.getSkill().equals(skill)).findFirst().map(Role::getLevel).orElse(0);
+    }
+
+    void increaseSkillLevel(String skill) {
+        skills.forEach(r -> {
+            if(r.getSkill().equals(skill)) r.increaseLevel();
+        });
     }
 
     @Override
@@ -42,5 +49,50 @@ public class Contributor {
 
     public String getName() {
         return name;
+    }
+
+    public void setAssigned(boolean ass) {
+        this.assigned = ass;
+    }
+
+    public boolean isAssigned() {
+        return assigned;
+    }
+
+    public boolean getLessThenReq(int req, String skill) {
+        if(skills.contains(skill)) {
+            for(Role role: skills) {
+                if(role.getLevel() - 1 == req) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public boolean getEquals(int req, String skill) {
+        if(skills.contains(skill)) {
+            for(Role role: skills) {
+                if(role.getLevel() == req) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isMore(int req, String skill) {
+          if(skills.contains(skill)) {
+            for(Role role: skills) {
+                if(role.getLevel() > req) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
     }
 }

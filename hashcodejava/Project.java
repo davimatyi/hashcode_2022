@@ -9,6 +9,8 @@ public class Project {
     private int bestBefore;
     private int roleCount;
 
+    private int startDay;
+
     private Map<Role, Contributor> associations;
     
 
@@ -21,6 +23,7 @@ public class Project {
         score = Integer.parseInt(s[2]);
         bestBefore = Integer.parseInt(s[3]);
         roleCount = Integer.parseInt(s[4]);
+        startDay = 0;
     }
 
     void addRole(String role) {
@@ -62,10 +65,18 @@ public class Project {
         return associations;
     }
 
-    public String getContributors() {
+    public String getContributorsString() {
         String s = "";
         for(Role r : roles) s += associations.get(r).getName() + " ";
         return s.substring(0, s.length()-1);
+    }
+
+    public void setStartDay(int currentDay) {
+        this.startDay = currentDay;
+    }
+
+    public int getStartDay() {
+        return startDay;
     }
 
 
