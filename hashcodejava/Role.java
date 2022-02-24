@@ -2,25 +2,14 @@ import java.util.Objects;
 
 public class Role {
 
-    private int index;
     private String skill;
     private int level;
 
-
-    public Role(int index, String skill, int level) {
-        this.index = index;
+    public Role( String skill, int level) {
         this.skill = skill;
         this.level = level;
     }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
+    
     public String getSkill() {
         return skill;
     }
@@ -42,16 +31,16 @@ public class Role {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
-        return index == role.index && level == role.level && Objects.equals(skill, role.skill);
+        return level == role.level && Objects.equals(skill, role.skill);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(index, skill, level);
+        return Objects.hash(skill, level);
     }
 
     @Override
     public String toString() {
-        return "Role " + index + " requiring " +  skill + " level " + level;
+        return skill + " " + level;
     }
 }
